@@ -10,7 +10,10 @@ const sets = games.map(game => game.split(": ")[1].split(";"))
 
 const limits = { red: 12, green: 13, blue: 14 }
 
-const sum = sets.reduce((sumIds, gameSets, i) => {
+const { sumIds, sumPowers } = sets.reduce(({ sumIds, sumPowers }, gameSets, i) => {
+	let isPossible = true
+	const minCubes = {}
+
 	for (const set of gameSets) {
 		const kubes = set.split(",")
 
@@ -18,12 +21,17 @@ const sum = sets.reduce((sumIds, gameSets, i) => {
 			const n = parseInt(kube)
 			const color = kube.match(/red|green|blue/)[0]
 
-			if (n > limits[color]) return sumIds
+			if (n > limits[color]) isPossible = false
+			if (!minCubes[color] || minCubes[color] < n) minCubes[color] = n
 		}
 	}
 
-	return sumIds + i + 1
-}, 0)
+	return {
+		sumIds: isPossible ? sumIds + i + 1 : sumIds,
+		sumPowers: sumPowers + Object.values(minCubes).reduce((acc, val) => val * acc)
+	}
+}, { sumIds: 0, sumPowers: 0 })
 
 
-console.log(sum)
+console.log("Sum of IDs:", sumIds)
+console.log("Sum of powers:", sumPowers)
