@@ -1,11 +1,6 @@
-import fs from "fs"
-import path from "path"
-import { fileURLToPath } from "url"
+import { readTextFile } from "../../io.mjs"
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-
-const content = fs.readFileSync(path.join(__dirname, "input.txt"), "utf-8")
-const lines = content.split("\n")
+const lines = readTextFile("2023/day03/input.txt")
 let sumPartNumbers = 0
 const potentialGears = {}
 

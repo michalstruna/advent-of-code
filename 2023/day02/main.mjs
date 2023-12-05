@@ -1,11 +1,6 @@
-import fs from "fs"
-import path from "path"
-import { fileURLToPath } from "url"
+import { readTextFile } from "../../io.mjs"
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-
-const content = fs.readFileSync(path.join(__dirname, "input.txt"), "utf-8")
-const games = content.split("\n")
+const games = readTextFile("2023/day02/input.txt")
 const sets = games.map(game => game.split(": ")[1].split(";"))
 
 const limits = { red: 12, green: 13, blue: 14 }

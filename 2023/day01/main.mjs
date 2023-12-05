@@ -1,8 +1,6 @@
-import fs from "fs"
-import path from "path"
-import { fileURLToPath } from "url"
+import { readTextFile } from "../../io.mjs"
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const lines = readTextFile("2023/day01/input.txt")
 
 const digits = {
 	zero: "0",
@@ -19,9 +17,6 @@ const digits = {
 
 const digitWords = Object.keys(digits).join("|")
 const wordToDigit = word => word.replace(new RegExp(digitWords), match => digits[match] || match)
-
-const content = fs.readFileSync(path.join(__dirname, "input.txt"), "utf-8")
-const lines = content.split("\n")
 
 const sum = lines.reduce((sum, line) => {
 	const digits = Array.from(line.matchAll(new RegExp(`(?=([0-9]|${digitWords}))`, "g")))
