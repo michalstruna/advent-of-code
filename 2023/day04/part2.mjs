@@ -12,13 +12,6 @@ const cards = lines.map((line, i) => {
 	return { n: i, winning, my, nIntersection: intersection.length }
 })
 
-// Part 1
-let points = cards.reduce((sum, { nIntersection }) => {
-	const points = (nIntersection === 0 ? 0 : 2**(nIntersection - 1))
-	return sum + points
-}, 0)
-
-// Part 2
 let nCards = 0
 const nCardsByType = cards.map(() => 1)
 
@@ -31,18 +24,4 @@ for (let i = 0; i < cards.length; i++) {
 	}
 }
 
-/*// Stupid slow non-mathematical brute force attempt.
-const cardsFifo = [...cards]
-
-while (cardsFifo.length) {
-	const card = cardsFifo.shift()
-	nCards++
-
-	if (card.nIntersection > 0) {
-		const startIndex = card.n + 1
-		cardsFifo.push(...cards.slice(startIndex, startIndex + card.nIntersection))
-	}
-}*/
-
-console.log("Points:", points)
-console.log("Cards:", nCards)
+console.log(nCards)

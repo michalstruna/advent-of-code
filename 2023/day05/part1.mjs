@@ -7,7 +7,6 @@ let items = []
 let ranges
 
 for (let i = 0; i < tmpItems.length; i++) {
-	//items.push({ from: tmpItems[i], to: tmpItems[i] + tmpItems[i + 1] - 1 }) // TODO: Part 2
 	items.push(tmpItems[i])
 }
 
